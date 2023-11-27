@@ -1,0 +1,18 @@
+*{
+    margin: 0;
+}
+.container{
+    color: white;
+    display: flex;
+    justify-content: space-around;
+    height: fit-content;
+    padding: 15px;
+    background-color: #777777;
+}
+.social-copyright{
+    color: white;
+    width: 250px;
+}
+.social{
+    display: flex;
+}
