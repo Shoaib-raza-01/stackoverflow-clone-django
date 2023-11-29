@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Sign Up - Stack Overflow {% endblock %}
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'style/authenticate/register.css' %}">
+{% endblock %}
+
+{% block header %}
+    {% include 'include/nonlogged-header.html'   %}
+{% endblock %}
+
+    {% block content %}
+    
+    <div class="part-one">
+        <div class="join">
+            Join the Stack Overflow community
+        </div>
+        <div class="points">
+            <img class="points-logo" src="{% static 'images/blue_question.png' %}" height="25px" width="30px" alt="question logo">
+            <p class="text">Get unstuck — ask a question</p>
+        </div>
+        <div class="points">
+            <img class="points-logo" src="{% static 'images/sort.png' %}" height="25px" width="30px" alt="question logo">
+            <p class="text">Unlock new privileges like voting and commenting</p>
+        </div>
+        <div class="points">
+            <img class="points-logo" src="{% static 'images/tag.png' %}" height="25px" width="30px" alt="question logo">
+            <p class="text">Save your favorite questions, answers, watch tags, and more</p>
+        </div>
+        <div class="points">
+            <img class="points-logo" src="{% static 'images/blue_trophy.png' %}" height="25px" width="30px" alt="question logo">
+            <p class="text">Earn reputation and badges</p>
+        </div>
+        <div class="meta">
+            Collaborate and share knowledge with a private group for FREE.<br>
+            <span style="color: #385499;">Get Stack Overflow for Teams free for up to 50 users. </span>
+        </div>
+    </div>
+
+    {% endblock %}
+    
+    {% block form %}
+        
+        <div class="part-two">
+            <div class="create">
+                Create your Stack Overflow account.
+                It's free and only takes a minute.
+            </div>
+            <div class="login-options">
+                <div class="google" style="background-color: white">
+                    <img class="s-logo" src="{% static 'images/google.png' %}" 
+                    width="30px" alt="google logo">
+                    <a href="#" style="color: black; text-decoration: none;">Log in with Google</a>
+                </div>
+            
+                <div class="github" style="background-color: black">
+                    <img class="s-logo" src="{% static 'images/github.png' %}" width="50px" alt="google logo">
+                    <a href="#" style="color: white; text-decoration: none;">Log in with Github</a>
+                </div>
+            
+                <div class="facebook" style="background-color: #385499;">
+                    <img class="s-logo" src="{% static 'images/facebook.png' %}" height="25px" width="30px" alt="google logo">
+                    <a href="#" style="color: white; text-decoration: none;">Log in with Facebook</a>
+                </div>
+            </div>
+            <form method="post" class="form">
+          
+                {% csrf_token %}
+                <div class="form-data">
+                {% for form_field in form %}
+                    <p class="label"> {{ form_field.label }} </p>
+                    {{ form_field}}
+                    {% if form_field.errors %}
+                        <span class="error">{{ form_field.errors }}</span><br/><br/>
+                    {% endif %}
+                {% endfor %}
+                <br>
+                <div class="pass">
+                    Passwords must contain at least eight characters, including at least 1 letter and 1 number. 
+                </div>
+
+                <div class="recaptcha">
+                    <div class="contain">
+                        <div class="box">
+                        <input id="robot" type="checkbox" id="robot" name="robot" value="robot">
+                        <label id="robot-text" for="robot">I'm not a robot.</label>
+                    </div>
+                    <p class="reText">
+                        reCAPTCHA
+                    </p>
+                    <p class="term">Privacy - Terms</p>
+                    </div>
+                </div>
+
+                <div class="check">
+                    <input type="checkbox" id="concent" name="conent" value="concent">
+                    <label for="concent" class="pass"> Opt-in to receive occasional product updates, user research invitations, company announcements, and digests.</label><br>
+                </div>
+
+                <button type="submit">Sign Up</button>
+                <div class="agree pass">
+                    By clicking “Sign up”, you agree to our terms of service and acknowledge that you have read and understand our privacy policy and code of conduct.
+                </div>
+                </div>
+          </form>
+          <div class="log-in">
+            Already have an account? <a href="{% url 'authenticate:login' %}" style="color: #385499; text-decoration : none">Log in</a>
+          </div>
+          <p class="log-in emp">
+            Are you an exployee? <span style="color: #385499"> Sign up on Talent </span>
+          </p>
+        
+        </div>
+
+    {% endblock %}

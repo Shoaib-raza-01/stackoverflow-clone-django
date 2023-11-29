@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'style/authenticate/login.css' %}">
+{% endblock %}
+{% block title %}
+  Log In - Stack Overflow 
+{% endblock %}
+
+
+{% block header %}
+  {% include 'include/nonlogged-header.html'   %}
+{% endblock %}
+
+{% block content %}
+  <div class="login-container">
+      <div class="login-options">
+        <div class="stack-logo">
+          <img class="logo" src="{% static 'images/icon.png' %}" alt="logo">
+      </div>
+      <div class="google" style="background-color: white;">
+          <img class="s-logo" src="{% static 'images/google.png' %}" 
+          width="30px" alt="google logo">
+          <a href="#" style="color: black; text-decoration: none;">Log in with Google</a>
+      </div>
+  
+      <div class="github" style="background-color: black;">
+          <img class="s-logo" src="{% static 'images/github.png' %}" width="50px" alt="google logo">
+          <a href="#" style="color: white; text-decoration: none;">Log in with Github</a>
+      </div>
+  
+      <div class="facebook" style="background-color: #385499;">
+          <img class="s-logo" src="{% static 'images/facebook.png' %}" height="25px" width="30px" alt="google logo">
+          <a href="#" style="color: white; text-decoration: none;">Log in with Facebook</a>
+      </div>
+  
+      <form method="post" class="form">
+  
+        {% csrf_token %}
+        <div class="form-data">
+          {% for form_field in form %}
+          <p class="label"> {{ form_field.label }} </p>
+          {{ form_field}}
+          {% if form_field.errors %}
+          <span class="error">{{ form_field.errors }}</span><br/><br/>
+          {% endif %}
+          
+        {% endfor %}
+        <br>
+        <button type="submit">Log in</button>
+        </div>
+        
+      </form>
+      </div>
+      <p class="go_to_sign_up">
+        Don't have an account? <a href="{% url 'authenticate:register' %}" style="color:#385499; text-decoration: none"> Sign up </a>
+      </p>
+      <p class="go_to_sign_up employe_sign_up">
+        Are you an exployee? <span style="color: #385499"> Sign up on Talent </span>
+      </p>
+  </div>
+  
+  
+{% endblock %}
