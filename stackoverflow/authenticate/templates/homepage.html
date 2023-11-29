@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block header %}
+    {% include 'include/logged-header.html'   %}
+{% endblock %}
+
+{% comment %}
+{% block header %}  
+    {% if {{ user.username }} %}
+    {% include 'include/logged-header.html' %}
+    {% else %}
+    {% include 'include/nonlogged-header.html' %}
+    {% endif %}  
+{% endblock %}
+{% endcomment %}
+
+{% block content %}
+    {{ user.username  }}
+{% endblock %}

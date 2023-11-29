@@ -1,0 +1,30 @@
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'logged-nav.css'%}">
+{% endblock %}
+
+<header>
+    <div class="header-container">
+
+        <div class="stackflow">
+            <a href="/"><img src="../static/images/Stack-Overflow-Logo.png"></a>
+        </div>
+        <div class="options">
+            <p class="product" ><a href="#">Products</a></p>
+        </div>
+        <div class="search-container">
+            <div class="search-icon">
+                <img src="../static/images/search.png" alt="search icon" height="40px" width="40px">
+            </div>
+            <input type="text" class="search-input" placeholder="Search...">
+        </div>
+        <div class="logged-in">
+            <img src="{% static 'images/stackoverflow_icon.png' %}"  alt="Profile Picture" height="30px" width="30px" />
+            <img src="{% static 'images/inbox.png' %}" alt="inbox" height="25px" width="25px"/>
+            <img src="{% static 'images/trophy.png' %}" alt="inbox" height="20px" width="20px"/>
+            <img src="{% static 'images/question.png' %}" alt="inbox" height="20px" width="20px"/>
+            <img src="{% static 'images/stack-exchange-logo.png' %}" alt="inbox" height="20px" width="20px"/>
+        </div>
+    </div>
+</header>

@@ -1,0 +1,35 @@
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'nonlogged-nav.css'%}">
+{% endblock %}
+<header>
+    <div class="header-container">
+
+        <div class="stackflow">
+            <a href="/"><img src="../static/images/Stack-Overflow-Logo.png"></a>
+        </div>
+        <div class="options">
+            <p class="product" ><a href="#">About</a></p>
+            <p class="product" ><a href="#">Products</a></p>
+            <p class="product" ><a href="#">For Teams</a></p>
+        </div>
+        <div class="search-container">
+            <div class="search-icon">
+                <img src="../static/images/search.png" alt="search icon" height="40px" width="40px">
+            </div>
+            <input type="text" class="search-input" placeholder="Search...">
+        </div>
+        <div class="logged-out">
+            <button class="login-button" onclick="goToLogin()">Log in</button>
+            <button class="signup-button" onclick="goToRegister()">Sign up</button>
+        </div>
+    </div>
+</header>
+<script>
+function goToLogin(){
+    window.location = "{% url 'authenticate:login'%}"
+}
+function goToRegister(){
+    window.location = "{% url 'authenticate:register'%}"
+}
+</script>
