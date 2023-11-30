@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Ask a public question - Stack Overflow{% endblock %}
+{% block head %} <link rel="stylesheet" href="{% static 'style/authenticate/askQuestion.css' %}">{% endblock %}
+{% block header %}
+    {% include 'include/logged-header.html' %}
+{% endblock %}
+
+{% block content %}
+<div class="ask-question">
+    <div class="ask">
+        <p class="tag">
+            Ask a public question
+        </p>
+        <img src="{% static 'images/askQuestion.png' %}" alt="ask question robot" srcset="">
+    </div>
+    <div class="instructions">
+        <p class="heading">
+            Writing a good question
+        </p>
+        <p class="text">
+            You're ready to <span style="color: rgb(99, 99, 253);">ask</span> a <span style="color: rgb(99, 99, 253);">programming-related question</span>  and this form will help guide you through the process.
+
+            Looking to ask a non-programming question?<span style="color: rgb(99, 99, 253);"> See the topics here</span> to find a relevant site. 
+        </p>
+        <p class="steps">Steps</p>
+        <ul>
+            <li>Summarize your problem in a one-line title.
+            </li>
+            <li>Describe your problem in more detail.</li>
+            <li>Describe what you tried and what you expected to happen.</li>
+            <li>Add “tags” which help surface your question to members of the community.</li>
+            <li>Review your question and post it to the site.</li>
+        </ul>
+    </div>
+    <!-- {{ user.username }} -->
+    <form method="post">
+        {% csrf_token %}
+        <div class="field_divs">
+          <label for="{{ form.Title.id_for_label }}">Title</label><br>
+          <p class="desc">
+            Be specific and imagine you're asking a question to another person. 
+          </p>
+          {{ form.Title }}
+        </div>
+      
+        <div class="field_divs">
+          <label for="{{ form.Description.id_for_label }}">What are the details of your problem? </label><br>
+          <p class="desc">
+            Introduce the problem and expand on what you put in the title. Minimum 20 characters.
+          </p>
+          {{ form.Description}}
+        </div>
+      
+        <div class="field_divs">
+          <label for="{{ form.what_you_try.id_for_label }}">What did you try and what were you expecting? </label><br>
+          <p class="desc">
+            Describe what you tried, what you expected to happen, and what actually resulted. Minimum 20 characters
+          </p>
+          {{ form.what_you_try }}
+        </div>
+      
+        <div class="field_divs">
+          <label for="{{ form.Tags.id_for_label }}">Tags:</label>
+          {{ form.Tags }}
+        </div>
+      
+        <div class="buttons">
+            <button type="submit" value="save">Post your Question</button>
+            <div class="discard" onclick="askAgain()"><p>Discard draft</p></div>
+        </div>
+      </form>
+
+      <script>
+        function askAgain(){
+            
+        }
+      </script>
+</div>
+
+{% endblock %}
+
+{% block footer %}
+    {% include 'include/footer.html' %}
+{% endblock %}
+
+
