@@ -1,14 +1,14 @@
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect
-from .forms import RegistrationForm
+from .forms import RegistrationForm, QuestionForm
 
 
 # Create your views here.
 
 def register(request):
-    if(request.user.username):
-        return redirect('authenticate:home')
+    # if(request.user.username):
+    #     return redirect('authenticate:home')
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
         if form.is_valid():
@@ -25,8 +25,8 @@ def home_page(request):
 
 
 def login_view(request):
-    if(request.user.username):
-        return redirect("authenticate:home")
+    # if(request.user.username):
+    #     return redirect("authenticate:home")
     if request.method == 'POST':
         form = AuthenticationForm(request, request.POST)
         if form.is_valid():
@@ -41,6 +41,43 @@ def login_view(request):
         form = AuthenticationForm()
 
     return render(request, 'login.html', {'form': form})
+
+
+
+def ask_question_view(request):
+    if request.method == 'POST':
+        form = QuestionForm(request.POST)
+        if form.is_valid():
+            question = form.save(commit=False)
+            question.user = request.user
+            question.save()
+            return redirect('authenticate:home')
+    else:
+        form = QuestionForm()
+    
+    return render(request, 'ask-question.html', {'form': form})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # def login_view(request):
 #     if request.method == 'POST':

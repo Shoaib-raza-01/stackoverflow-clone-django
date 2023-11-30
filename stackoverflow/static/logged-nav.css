@@ -1,19 +1,16 @@
-header{
-    background-color: rgb(255, 255, 255);
-    border-bottom: 1px solid #c1c9d1;
-    height: 50px;
-}
-.header-container{
+.header-container {
     height: 50px;
     display: flex;
+    border-top: 3px solid orange;
+    border-bottom: 1px solid #c1c9d1;
     background-color: #ffffff;
     justify-content: space-around;
-    padding: 0 270px;
     align-items: center;
     position: fixed;
     top: 0;
-    margin: 0 auto;
+    width: 100%;
 }
+
 .hamburger{
     height: 40px;
     width: 40px;
@@ -54,7 +51,7 @@ header{
 
 .search-container {
     height: 30px;
-    width: 600px;
+    width: 35vw;
     display: flex;
     align-items: center;
     border: 1px solid #ccc;

@@ -52,8 +52,7 @@ class Question(models.Model):
     Description = models.TextField()
     CreatedAt = models.DateTimeField(auto_now_add=True)
     what_you_try = models.TextField()
-    expectation = models.TextField()
-    Tags = models.TextField()
+    Tags = models.CharField(max_length=100)
 
 class Answer(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)

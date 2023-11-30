@@ -1,6 +1,7 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from . import models
 
 class RegistrationForm(UserCreationForm):
     email = forms.EmailField()
@@ -17,3 +18,13 @@ class RegistrationForm(UserCreationForm):
 
 #     def clean_username(self):
 #         return self.cleaned_data['email']
+
+class QuestionForm(forms.ModelForm):
+    class Meta:
+        model = models.Question
+        fields = [
+            'Title',
+            'Description',
+            'what_you_try',
+            'Tags'
+        ]

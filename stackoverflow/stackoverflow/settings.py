@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     
     # custom apps
     'authenticate',
+    
+    # third prty apps
 ]
 
 MIDDLEWARE = [

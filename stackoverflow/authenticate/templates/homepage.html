@@ -1,20 +1,39 @@
 {% extends 'base.html' %}
 {% load static %}
-
-{% block header %}
-    {% include 'include/logged-header.html'   %}
+{% block head %}
+    <script>
+        function goToAskQuestion(){
+            console.log("clicked");
+            window.location = "{% url 'authenticate:ask-question'%}";
+            }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-Avb2QiuDEEvB4bZJYdft2mNjVShBftLdPG8FJ0V7irTLQ8Uo0qcPxh4Plq7G5tGm0rU+1SPhVotteLpBERwTkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{% static 'style/authenticate/homepage.css' %}">
 {% endblock %}
 
-{% comment %}
 {% block header %}  
-    {% if {{ user.username }} %}
-    {% include 'include/logged-header.html' %}
-    {% else %}
-    {% include 'include/nonlogged-header.html' %}
-    {% endif %}  
-{% endblock %}
-{% endcomment %}
 
-{% block content %}
-    {{ user.username  }}
+    {% if user.is_authenticated %}
+        {% include 'include/logged-header.html' %}
+    {% else %}
+        {% include 'include/nonlogged-header.html' %}
+    {% endif %}  
+
+{% endblock %}
+
+{% block sidebar %}
+    {% include 'side-bar.html'   %}
+{% endblock %}
+
+{% block main %}
+    <div class="page-body">
+        <button type="button" onclick="goToAskQuestion()">Ask Question</button>
+    </div>
+{% endblock %}
+    
+{% block meta %}
+
+    <div class="meta-data">
+        shoaib
+    </div>
 {% endblock %}
