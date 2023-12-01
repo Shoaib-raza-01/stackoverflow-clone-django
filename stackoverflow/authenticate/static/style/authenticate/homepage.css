@@ -2,7 +2,7 @@
     position: fixed;
     top: 55px;
     width: 25vw;
-    text-align: end;
+    /* text-align: end; */
     border-right: 1px solid #c9c9c9ee;
     height: 100%;
 }
