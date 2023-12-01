@@ -1,0 +1,71 @@
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'style/authenticate/main-body.css' %}">
+
+    <script>
+        function hideContent() {
+            document.querySelector('.search-ai').style.display = 'none';
+        }
+        function getRandomInt(min, max) {
+            const num = Math.floor(Math.random() * (max - min) + min);
+            document.querySelector('.cnt').innerHTML = num
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const randomResult = getRandomInt(50, 200); 
+            console.log('Random Number:', randomResult);
+        });
+
+        function handlepickClick(clickedpick) {
+            const allpicks = document.querySelectorAll('.pick');
+            allpicks.forEach(pick => {
+                pick.classList.remove('clicked');
+            });
+            clickedpick.classList.add('clicked');
+        }
+    </script>
+
+{% endblock %}
+<div class="page-body">
+    <div class="top-div">
+        <p class="entry-text">
+            Top Questions
+        </p>
+        <button class="ask-ques-btn" type="button" onclick="goToAskQuestion()">Ask Question</button>
+    </div>
+    <div class="search-ai">
+        <img src="{% static 'images/ai_search.png' %}" alt="search image">
+        <div class="new-exp">
+            <p class="level-1">New search experience powered by AI</p>
+            <p class="level-2">Stack Overflow is leveraging AI to summarize the most relevant questions and answers from the community, with the option to ask follow-up questions in a conversational format.</p>
+            <p style="font-size: 11px; color: #2071db; cursor: pointer">Manage preferences</p>
+        </div>
+        <i class="fa-solid fa-xmark cross" style="cursor: pointer;" onclick="hideContent()"></i>        
+    </div>
+    <div class="hot-picks">
+        <div class="interesting pick" onclick="handlepickClick(this)">
+            <p>Interesting</p>
+        </div>
+        <div class="bountied pick" onclick="handlepickClick(this)">
+            <div class="b-count">
+                <p class="cnt"></p>
+            </div>
+            <div class="b-text">
+                <p>Bountied</p>
+            </div>
+        </div>
+        <div class="hot pick" onclick="handlepickClick(this)">
+            <p>Hot</p>
+        </div>
+        <div class="week pick" onclick="handlepickClick(this)">
+            <p>Week</p>
+        </div>
+        <div class="month pick" onclick="handlepickClick(this)">
+            <p>Month</p>
+        </div>
+    </div>
+    {% block questionlist %}
+        {% include 'include/question-list.html' %}
+    {% endblock %}
+</div>
+

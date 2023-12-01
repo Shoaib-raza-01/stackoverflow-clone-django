@@ -1,0 +1,109 @@
+.page-body{
+    width: 40vw;
+    padding-top: 10px;
+    margin-bottom: 20rem;
+}
+.top-div{
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    padding: 25px 0;
+    padding-left: 25px;
+}
+.entry-text{
+    font-size: 1.6rem;
+}
+.ask-ques-btn{
+    background-color: #2071db;
+    color: white;
+    border: none;
+    height: 35px;
+    width: fit-content;
+    padding: 0 10px;
+    border-radius: 8px;
+}
+.search-ai{
+    border: 1px solid #d8cece;
+    border-radius: 8px;
+    margin-left: 25px;
+    margin-bottom: 25px;
+    display: flex;
+    padding: 20px 10px;
+    padding-right: 20px;
+}
+.level-1{
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+.level-2{
+    padding: 7px 0;
+    font-size: 12px;
+}
+/* .cross:hover{
+    height: 30px;
+    width: 40px;
+    border-radius: 8px;
+    align-content: center;
+    background-color: #f1f2f3;
+} */
+.hot-picks{
+    float: right;
+    border: 1px solid #d8cece;
+    border-radius: 8px;
+    /* padding: 0 10px; */
+    display: flex;
+    align-content: center;
+    justify-content: space-around;
+    font-size: 14px;
+}
+.pick.clicked {
+    background-color: #cfdbe7;
+}
+.bountied{
+    display: flex;
+    padding: 10px;
+    border-left: 1px solid #d8cece;
+    border-right: 1px solid #d8cece;
+}
+.interesting p, .hot p, .week p, .month p{
+    padding: 13px 0;
+    padding-right: 10px;
+
+}
+.b-count p{
+    padding: 3px 5px;
+    background-color: #2071db;
+    color: white;
+    border-radius: 2px;
+}
+.b-text{
+    padding-left: 10px;
+    padding-top: 3px; 
+}
+.hot p, .week p{
+    padding: 13px 10px;
+    border-right: 1px solid #d8cece;
+}
+.month p{
+    padding-left: 10px;
+}
+.interesting p{
+    padding-left: 10px;
+}
+
+.bountied:hover, .hot:hover, .week:hover{
+    cursor: pointer;
+    background-color: #f1f2f3;
+}
+.interesting:hover{
+    cursor: pointer;
+    background-color: #f1f2f3;
+    border-bottom-left-radius: 8px;
+    border-top-left-radius: 8px;
+}
+.month:hover{
+    cursor: pointer;
+    background-color: #f1f2f3;
+    border-bottom-right-radius: 8px;
+    border-top-right-radius: 8px;
+}
