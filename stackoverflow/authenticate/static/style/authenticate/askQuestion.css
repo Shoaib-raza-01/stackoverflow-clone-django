@@ -68,13 +68,16 @@ label{
     margin: 5px 0;
 }
 input{
-    width: 40vw;
+    width: 39.8vw;
     height: 40px;
+    padding-left: 10px;
     border: 1px solid #d8cece;
     border-radius: 8px;
 }
 textarea{
-    width: 40vw;
+    width: 39.8vw;
+    padding-left: 10px;
+    padding-top: 10px;
     border: 1px solid #d8cece;
     border-radius: 8px;
     line-height: 2;

@@ -1,0 +1,136 @@
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'style/authenticate/side-pannel.css' %}">
+{% endblock %}
+<div class="meta-data">
+    <!-- <i class="fa-regular fa-message" style="color: #1c71d8;"></i> -->
+    <div class="meta-features">
+        <div class="the-blog">
+            <p class="section-title">The Overflow Blog</p>
+            <div class="side-list">
+                <div class="list-element">
+                    <i class="fa-solid fa-pen" style="color: #000000;"></i>
+                    <p>Will developers return to hostile offices?</p>
+                </div>
+
+                <div class="list-element">
+                    <i class="fa-solid fa-pen" style="color: #000000;"></i>
+                    <p>How to scale a business-ready AI platform with watsonx: Q&A with IBM</p>
+                </div>
+                <span>sponsored post</span>
+            </div>
+        </div>
+        <div class="the-blog featured-meta">
+            <p class="section-title">Featured on Meta</p>
+            <div class="side-list">
+                <div class="list-element">
+                    <img src="{% static 'images/stackoverflow_icon.png'%}" alt="icon" style="height: 15px; width: 15px">
+                    <p class="p-color">OverflowAI Alpha invitation emails were distributed in error Nov 28th</p>
+                </div>
+
+                <div class="list-element">
+                    <img src="{% static 'images/stackoverflow_icon.png'%}" alt="icon" style="height: 15px; width: 15px">
+                    <p class="p-color">Collectives updates: new features and ways to get started with Discussions </p>
+                </div>
+                <div class="list-element">
+                    <img src="{% static 'images/stackoverflow_icon.png'%}" alt="icon" style="height: 15px; width: 15px">
+                    <p>Temporary policy: Generative AI (e.g., ChatGPT) is banned </p>
+                </div>
+            </div>
+        </div>
+        <div class="the-blog hot-meta">
+            <p class="section-title">Hot Meta Post</p>
+            <div class="side-list">
+                <div class="list-element">
+                    <p>7</p>
+                    <p class="p-color">
+                        Do duplicates of "sin/cos/tan expect radians instead of degrees" needs to... </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="custom-filter">
+        <div class="custom-head">
+            <p>Custom Filters</p>
+        </div>
+        <p class="create-custom-filter">Create a custom filter</p>
+    </div>
+    <div class="custom-filter">
+        <div class="custom-head">
+            <p>Watched Tags</p>
+        </div>
+        <div class="something">
+            <p class="watched-tag">Flutter</p>
+            <p class="watched-tag">Java</p>
+            <p class="watched-tag">Python</p>
+        </div>
+    </div>
+    <div class="custom-filter">
+        <div class="custom-head">
+            <p>Ignored Tags</p>
+        </div>
+        <div class="ignored-tag-div">
+            Add an ignored tag
+        </div>
+    </div>
+
+    <div class="custom-filter">
+        <div class="custom-head">
+            <p>Collectives</p>
+            <span style="float: right; 
+            position:relative; 
+            top:-32px; 
+            color:rgb(0, 110, 255); 
+            font-size:12px; 
+            padding-right:20px">
+                see all
+            </span>
+        </div>
+        <div class="microsoft">
+            <div class="img-join">
+                <img src="{% static 'images/microsoft.png' %}" alt="microsoft" height="25px" width="25px">
+                <div style="margin-top: -10px; padding-left:10px; margin-right:70px">
+                    <span style="font-size: 15px; color:grey">Microsoft Azure</span><br>
+                    <span style="font-size: 13px; color:grey">50k members</span>
+                </div>
+                <div class="join-btn">
+                    Join
+                </div>
+            </div>
+            <div class="info-txt">
+                Microsoft Azure provides organizations with leading infrastructure, platform capabilities...
+            </div>
+        </div>
+        <div class="microsoft">
+            <div class="img-join">
+                <img src="{% static 'images/nlp-img.png' %}" alt="microsoft" height="35px" width="35px">
+                <div style="margin-top: -10px; padding-left:10px; margin-right:70px">
+                    <span style="font-size: 15px; color:grey">NLP</span><br>
+                    <span style="font-size: 13px; color:grey">30k members</span>
+                </div>
+                <div class="join-btn">
+                    Join
+                </div>
+            </div>
+            <div class="info-txt">
+                A collective where developers focused on continuous integration, delivery, and...
+            </div>
+        </div>
+        <div class="microsoft">
+            <div class="img-join">
+                <img src="{% static 'images/line_chart.png' %}" alt="microsoft" height="35px" width="35px">
+                <div style="margin-top: -10px; padding-left:10px; margin-right:70px">
+                    <span style="font-size: 15px; color:grey">WSO 2 </span><br>
+                    <span style="font-size: 13px; color:grey">10k members</span>
+                </div>
+                <div class="join-btn">
+                    Join
+                </div>
+            </div>
+            <div class="info-txt">
+                Twilio has democratized channels like voice, text, chat, video, and email by virtualizing the....
+            </div>
+        </div>
+    </div>
+</div>

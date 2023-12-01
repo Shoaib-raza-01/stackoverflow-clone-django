@@ -53,13 +53,15 @@ class Question(models.Model):
     CreatedAt = models.DateTimeField(auto_now_add=True)
     what_you_try = models.TextField()
     Tags = models.CharField(max_length=100)
+    votes = models.IntegerField(default=0)
+    views = models.IntegerField(default=0)
 
 class Answer(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     Content = models.TextField()
     CreatedAt = models.DateTimeField(auto_now_add=True)
-    Likes = models.IntegerField()
+    Likes = models.IntegerField(default=0)
 
 class Comment(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE, null=True)
