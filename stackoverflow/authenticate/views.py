@@ -1,7 +1,10 @@
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate
-from django.shortcuts import render, redirect
+from django.http import HttpResponse
+from django.shortcuts import get_object_or_404, render, redirect
 from .forms import RegistrationForm, QuestionForm
+from django.db.models import Count
+from . import models
 
 
 # Create your views here.
@@ -21,7 +24,17 @@ def register(request):
 
 def home_page(request):
     user=request.user
-    return render(request, "homepage.html", {"user" : user})
+    questions = models.Question.objects.annotate(answer_count=Count('answer')).order_by('-CreatedAt')[:20]
+    
+    for question in questions:
+        question.tag_list = [tag.strip() for tag in question.Tags.split(',')]
+        
+    context = {
+        "questions": questions,
+        "user" : user,
+        # "tags" : tags
+    }
+    return render(request, "homepage.html", context)
 
 
 def login_view(request):
@@ -56,6 +69,10 @@ def ask_question_view(request):
         form = QuestionForm()
     
     return render(request, 'ask-question.html', {'form': form})
+
+def question_detail(request, question_id):
+    question = get_object_or_404(models.Question, id=question_id)
+    return render(request, 'question-detail.html', {'question': question})
 
 
 

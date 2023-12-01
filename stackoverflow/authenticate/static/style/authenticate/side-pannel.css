@@ -1,0 +1,110 @@
+.meta-data{
+    margin: 20px;
+    margin-top: 35px;
+}
+.meta-features{
+    width: 300px;
+    background-color: #fdf7e7;
+    border: 1px solid #f4d27b;
+    border-radius: 4px;
+}
+.the-blog .section-title{
+    padding: 15px;
+    font-size: .8rem;
+    font-weight: 600;
+    border-bottom: 1px solid #f4d27b;
+    background-color: #faecc6;
+}
+.list-element{
+    display: flex;
+    font-size: 13px;
+    padding: 0 20px;
+    padding-top: 15px;
+}
+.list-element p{
+    padding-left: 10px;
+}
+.side-list span{
+    color: rgb(105, 86, 86);
+    font-size: 12px;
+    font-style: italic;
+    padding-left: 40px ;
+    padding-top: 15px;
+}
+.featured-meta{
+    margin-top: 15px;
+    border-top:1px solid #f4d27b ;
+    padding-bottom: 15px;
+}
+.featured-meta .side-list .list-element p{
+    color: rgb(79, 94, 94);
+}
+.hot-meta{
+    padding-bottom: 15px;
+}
+.custom-filter{
+    width: 300px;
+    border: 1px solid #e3e6e8;
+    border-radius: 4px;
+    margin-top: 20px;
+}
+.custom-head{
+    background-color: #f9fafa;
+    color: #76818a;
+}
+.custom-filter p{
+    font-size: 1rem;
+    padding: 15px;
+    border-bottom: 1px solid #e3e6e8;
+}
+.create-custom-filter{
+    font-size: 11px;
+    color: #1a97eb;
+    border-bottom: none !important;
+}
+.something{
+    padding: 20px 15px;
+}
+.watched-tag {
+    display: inline;
+    padding: 5px !important ; 
+    border-radius: 2px !important;
+    background-color: #d7eafd !important;
+    font-size: 12px !important;
+    color: #1a97eb;
+} 
+.ignored-tag-div{
+    color: #1a97eb;
+    width: fit-content;
+    font-size: 13px;
+    cursor: pointer;
+    border: 1px solid #1a97eb;
+    border-radius: 5px;
+    padding: 8px;
+    margin: 20px auto;
+}
+.img-join{
+    display: flex;
+    padding: 20px;
+    justify-content: space-around;
+    width: fit-content;
+}
+.join-btn{
+    padding: 13px;
+    border: 1px solid #1a97eb;
+    border-radius: 8px;
+    color: #1a97eb;
+    font-size: 12px;
+    margin-top: -10px;
+}
+.info-txt{
+    padding: 20px;
+    padding-top: 0;
+    font-size: small;
+    color: #76818a;
+    max-lines: 2;
+    overflow: hidden;
+    line-clamp: 2;
+    text-overflow: ellipsis;
+    border-bottom:1px solid #e3e6e8;
+}

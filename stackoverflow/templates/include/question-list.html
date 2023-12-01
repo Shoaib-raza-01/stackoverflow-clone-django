@@ -4,6 +4,55 @@
 {% endblock %}
 {% block questionlist %}
     <div class="question-list-container">
+        {% for question in questions %}
         
+        <div class="question-container">
+
+            <div class="question-meta">
+                <p class="votes">
+                    {{ question.votes }} votes
+                </p>
+                <p class="answers">
+                    {% if question.answer_count > 0 %}
+                    <div class="gt_zero">
+                        {{ question.answer_count }} answers
+                    </div>
+                    
+                    {% else %}
+                    {{ question.answer_count }} answers
+                    {% endif %}
+                </p>
+                <p class="view">
+                    {{ question.views }} views
+                </p>
+            </div>
+
+            <div class="question-title">
+                <div class="title-text">
+                    <a href="{% url 'authenticate:question-detail' question.id %}">{{ question.Title }}</a>
+                </div>
+                <div class="tag-timestamp">
+                    <div class="tags-container">
+                        {% for tag in question.tag_list %}
+                            <div class="tag-content">
+                                {{ tag }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="posted_at">
+                        <img src="{% static 'images/bookmark.png'%}" alt="profile image here"
+                        style="width:15px;height:15px;">
+                        {{ question.user }}
+                        <p class="reputation"> 2 </p>
+                        <p class="ago">asked {{ question.CreatedAt|timesince }} ago</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    {% endfor %}
+    <p class="last-text">
+        Looking for more? Browse the <span style="color: rgb(88, 88, 255); cursor: pointer;">complete list of questions</span>, or <span style="color: rgb(88, 88, 255);cursor: pointer;">popular tags</span>. Help us answer <span style="color: rgb(88, 88, 255);cursor: pointer;">unanswered questions</span>.
+    </p>
     </div>
 {% endblock %}

@@ -1,0 +1,4 @@
+{{ question.Title }}
+{% for answer in question.answer_set.all %}
+    <br>{{ answer.Content }}<br>
+{% endfor %}
