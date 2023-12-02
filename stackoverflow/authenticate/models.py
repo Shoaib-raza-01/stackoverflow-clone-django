@@ -64,9 +64,8 @@ class Answer(models.Model):
     Likes = models.IntegerField(default=0)
 
 class Comment(models.Model):
-    question = models.ForeignKey(Question, on_delete=models.CASCADE, null=True)
-    answer = models.ForeignKey(Answer, on_delete=models.CASCADE, null=True)
+    question = models.ForeignKey(Question, on_delete=models.CASCADE, null=True, blank=True)
+    answer = models.ForeignKey(Answer, on_delete=models.CASCADE, null=True, blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     Content = models.TextField()
     CreatedAt = models.DateTimeField(auto_now_add=True)
-    Likes = models.IntegerField()

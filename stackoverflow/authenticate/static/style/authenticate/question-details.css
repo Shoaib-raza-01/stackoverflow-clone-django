@@ -1,0 +1,104 @@
+.added-modified{
+    margin-left: 25px;
+    border-bottom: 1px solid #a1a3a5;
+    width: 55.5vw;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+
+}
+.top-div{
+    padding-left: 0 !important;
+}
+.entry-text{
+    width: 49vw;
+    color: #494e52;
+}
+.meta-data{
+    padding-top: 110px;
+}
+.added-info{
+    margin-top: -17px;
+    width: auto;
+    display: flex;
+    color: grey;
+    font-size: small;
+}
+.question-information{
+    display: flex;
+    margin: 25px;
+}
+.up-vote{
+    background-color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    border: 1px solid rgb(212, 208, 208);
+}
+.up-vote:hover{
+    background-color: rgba(248, 146, 99, 0.5);
+}
+.vote-count-div{
+    text-align: center;
+    font-weight: 600;
+    font-size: 18px;
+    padding: 10px 0;
+}
+.bookmark{
+    display: flex;
+    padding: 15px 0;
+    justify-content: center;
+}
+.timeline{
+    padding-top: 0 !important;
+}
+.ques-info{
+    padding-left: 20px;
+    font-size: 15px;
+    line-height: 20px;
+}
+.ques-what-u-tried{
+    padding-top: 25px;
+}
+.tags-container{
+    margin-top: 25px;
+    display: flex;
+}
+.tag-content{
+    background-color: #f0f3f7;
+    padding: 2px 8px;
+    font-size: 12px;
+    margin-right: 8px;
+    border-radius: 4px;
+    color: rgb(79, 126, 255);
+}
+.extra-user-info{
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 25px;
+    border-bottom: 1px solid #d4d7da;
+}
+.share-edit{
+    display: flex;
+}
+.share-edit p{
+    display: flex;
+    font-size: 13px;
+    color: #494e52;
+    padding: 0 5px;
+    cursor: pointer;
+}
+.user-info-stats{
+    background-color: #edf5fd;
+    padding: 5px;
+    width: 200px;
+    border-radius: 8px;
+    font-size: 13px;
+    color: #494e52;
+}
+.user-pic-stat{
+    display: flex;
+}

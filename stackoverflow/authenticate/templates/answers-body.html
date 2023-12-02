@@ -1,0 +1,106 @@
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'style/authenticate/main-body.css' %}">
+
+    <script>
+        function voteUp(){
+
+        }
+        function voteDown(){
+
+        }
+    </script>
+
+{% endblock %}
+<div class="page-body">
+    <div class="added-modified">
+        <div class="top-div">
+        <p class="entry-text">
+            {{ question.Title}}
+        </p>
+        <button class="ask-ques-btn" type="button" onclick="goToAskQuestion()">Ask Question</button>
+    </div>
+    <div class="added-info">
+        <p class="asked-at">Asked <span style="color: black; padding-right:15px">{{ question.CreatedAt|timesince:""}}</span></p>
+        <p class="modified-at">Modified <span style="color: black; padding-right:15px">{{ question.CreatedAt|timesince:""}}</span></p>
+        <p class="views-count">Views <span style="color: black; padding-right:15px">{{ question.views}}</span></p>
+    </div>
+    </div>
+
+    <div class="question-information">
+        <div class="operations-on-ques">
+            <form method="post">
+                {% csrf_token %}
+                <input type="hidden" name="input_type" value="up">
+                <button type="submit" class="up-vote">
+                    <i class="fa-solid fa-caret-up"></i>
+                </button>
+            </form>
+
+            <div class="vote-count-div">
+                {{ question.votes }}
+            </div>
+
+            <form method="post">
+                {% csrf_token %}
+                <input type="hidden" name="input_type" value="down">
+                <button type="submit" class="up-vote">
+                    <i class="fa-solid fa-caret-down"></i>
+                </button>
+            </form>
+            <div class="bookmark">
+                <i class="fa-regular fa-bookmark" style="color: rgb(192, 178, 178);"></i>
+            </div>
+            <div class="bookmark timeline">
+                <i class="fa-solid fa-clock-rotate-left" style="color: #c0bfbc;"></i>
+            </div>
+        </div>
+        <div class="ques-info">
+            <div class="ques-decsription">
+                {{ question.Description }}
+            </div>
+            <div class="ques-what-u-tried">
+                {{ question.what_you_try }}
+            </div>
+            <div class="tags-container">
+                {% for tag in question.tag_list %}
+                    <div class="tag-content">
+                        {{ tag }}
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="extra-user-info">
+                <div class="share-edit">
+                    <p>Share</p>
+                    <p>Edit</p>
+                    <p>Follow</p>
+                </div>
+                <div class="user-info-stats">
+                    Asked {{ question.CreatedAt|timesince:""}}
+                    <div class="user-pic-stat">
+                        <img src="{% static 'images/icon.png'%}" alt="profile" height="40px" width="40px"/>
+                        <div style="padding-left: 7px;">
+                            <span style="color: rgb(60, 138, 255);">{{ user.username }}</span>
+                            <p>1</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="comment-section">
+        {% for comment in question.comment_set.all %}
+            {{ comment.Content }}<br>
+        {% endfor %}
+    </div>
+
+    <!-- <div class="answers">
+        {% for answer in question.answer_set.all %}
+            {{ answer.Content }} <br>
+            {% for com in answer.comment_set.all %}
+                {{ com.Content }}<br>
+            {% endfor %}
+        {% endfor %}
+    </div> -->
+</div>
+

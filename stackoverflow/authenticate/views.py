@@ -72,6 +72,17 @@ def ask_question_view(request):
 
 def question_detail(request, question_id):
     question = get_object_or_404(models.Question, id=question_id)
+    
+    question.tag_list = question.Tags.split(",")
+    
+    if request.method == 'POST':
+        input_type = request.POST.get("input_type")
+        if input_type == "up":
+            question.votes +=1
+        if input_type == "down":
+            question.votes -= 1
+        question.save()
+        return redirect('authenticate:question-detail', question_id=question.id)
     return render(request, 'question-detail.html', {'question': question})
 
 
