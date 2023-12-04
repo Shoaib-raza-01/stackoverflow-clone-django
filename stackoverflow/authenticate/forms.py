@@ -28,3 +28,13 @@ class QuestionForm(forms.ModelForm):
             'what_you_try',
             'Tags'
         ]
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = models.Comment
+        fields = ['Content'] 
+        
+class AnswerForm(forms.ModelForm):
+    class Meta:
+        model = models.Answer
+        fields = ['Content']

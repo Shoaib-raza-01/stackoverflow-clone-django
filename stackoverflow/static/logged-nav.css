@@ -75,3 +75,14 @@
 .logged-in img{
     margin: 0 10px;
 }
+.stack-exchanfe-dropdown{
+    background-color: transparent;
+    border: none;
+
+}
+.ul-content{
+    background-color: #c1c9d1;
+    position: absolute;
+    top: 50px;
+    display: none;
+}

@@ -2,6 +2,20 @@
 
 {% block head %}
     <link rel="stylesheet" href="{% static 'logged-nav.css'%}">
+    <script>
+        function toggleMenu() {
+            var menu = document.querySelector(".ul-content");
+            menu.style.display = menu.style.display === "block" ? "none" : "block";
+          }
+          document.addEventListener('mouseup', function (e) {
+            var menuList = document.querySelector(".ul-content");
+            var profileButton = document.querySelector('.stack-exchanfe-dropdown');
+    
+            if (!menuList.contains(e.target) && !profileButton.contains(e.target)) {
+                menuList.style.display = 'none';
+            }
+        });
+    </script>
 {% endblock %}
 
 <header>
@@ -24,7 +38,17 @@
             <img src="{% static 'images/inbox.png' %}" alt="inbox" height="25px" width="25px"/>
             <img src="{% static 'images/trophy.png' %}" alt="inbox" height="20px" width="20px"/>
             <img src="{% static 'images/question.png' %}" alt="inbox" height="20px" width="20px"/>
-            <img src="{% static 'images/stack-exchange-logo.png' %}" alt="inbox" height="20px" width="20px"/>
+            <button class="stack-exchanfe-dropdown" onclick="toggleMenu()">
+                <img src="{% static 'images/stack-exchange-logo.png' %}" alt="inbox" height="20px" width="20px"/>
+                <div class="ul-content">
+                    <div class="ul-heading">
+                        CURRENT COMMUNITY
+                    </div>
+                    <div class="ul-conyent">
+
+                    </div>
+                </div>
+            </button>
         </div>
     </div>
 </header>

@@ -62,6 +62,10 @@ class Answer(models.Model):
     Content = models.TextField()
     CreatedAt = models.DateTimeField(auto_now_add=True)
     Likes = models.IntegerField(default=0)
+    flag = models.BooleanField(default=True)
+    class Meta:
+        ordering = ["-CreatedAt"]
+        # unique_together =["Likes", "user", "Content"]
 
 class Comment(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE, null=True, blank=True)
@@ -69,3 +73,20 @@ class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     Content = models.TextField()
     CreatedAt = models.DateTimeField(auto_now_add=True)
+    
+    
+class QuestionVote(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    vote_type = models.CharField(max_length=4)
+
+    class Meta:
+        unique_together = ('user', 'question')
+        
+class AnswerVote(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    answer = models.ForeignKey(Answer, on_delete=models.CASCADE)
+    vote_type = models.CharField(max_length=4)
+
+    class Meta:
+        unique_together = ('user', 'answer')
