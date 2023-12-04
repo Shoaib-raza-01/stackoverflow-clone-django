@@ -3,12 +3,37 @@
     <link rel="stylesheet" href="{% static 'style/authenticate/main-body.css' %}">
 
     <script>
-        function voteUp(){
-
+        function goToAskQuestion(){
+            window.location = "{% url 'authenticate:ask-question'%}";
         }
-        function voteDown(){
-
+        function showCommentInput(){
+            document.querySelector('.input-comment').style.display='block';
         }
+        function showAnswerCommentInput(clickedItemId){
+            let commentForm = document.querySelector(`.answer-${clickedItemId}`);
+            if (commentForm) {
+                commentForm.style.display = 'block';
+            }
+        }
+        function checkEnter(event) {
+            if (event.key === 'Enter') {
+                let commentTextarea = document.querySelector('.comment');
+                commentTextarea.value = '';
+                commentTextarea.style.display = 'none';
+            }
+        }
+        document.addEventListener('mouseup', (event) => {
+            const ques_inpt = document.querySelector('.input-comment');
+            const ans_inpt = document.querySelectorAll('.answer-input-comment');
+            for (let i=0;i<ans_inpt.length;i++){
+                if (!ans_inpt[i].contains(event.target)){
+                    ans_inpt[i].style.display='none';
+                    }
+                }
+            if (!ques_inpt || !ques_inpt.contains(event.target)) {
+                document.querySelector('.input-comment').style.display = 'none';
+            }
+        })
     </script>
 
 {% endblock %}
@@ -88,19 +113,145 @@
             </div>
         </div>
     </div>
+
     <div class="comment-section">
         {% for comment in question.comment_set.all %}
-            {{ comment.Content }}<br>
+            <p>{{ comment.Content }} - <span style="color: rgb(126, 126, 255);">{{ comment.user }}</span></p>
         {% endfor %}
     </div>
+    <div class="text-comment-input">
+        <div class="input-comment">
+            <form method="post">
+                {% csrf_token %}
+                <div class="ques-comment-area">
+                    {{ form.Content }}
+                    {% if form.Content.errors %}
+                    <p>{{ form.Content.errors }}</p>
+                    {% endif %}
+                </div>
+                <input type="hidden" name="input_type" value="comment">
+                <button class="ques-comment-btn" onclick="showError()">Post your comment</button>
+            </form> 
+        </div>
+        <p class="add-btn" onclick="showCommentInput()">
+            Add a comment
+        </p>
+    </div>
 
-    <!-- <div class="answers">
-        {% for answer in question.answer_set.all %}
-            {{ answer.Content }} <br>
-            {% for com in answer.comment_set.all %}
-                {{ com.Content }}<br>
+    <div class="answers-container">
+        {% if  question.answer_set.count  > 0 %}
+            <div class="answer-header">
+                <p> {{question.answer_set.count}} Answers</p>
+                <div class="sort-input">
+                    Sorted by:
+                    <select name="sorting-option" id="sort">
+                        <option value="">Highest score (default)</option>
+                        <option value="">Trending (recent votes count more)</option>
+                        <option value="">Date modified (newest first)</option>
+                        <option value="">Date created (oldest first)</option>
+
+                    </select>
+                </div>
+            </div>
+            <div class="answer">
+                {% for answer in answers %}
+                <div class="answer-card">
+                    <div class="operations-on-ques">
+                        <form method="post" action="{% url 'authenticate:question-detail' question.id %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="input_type" value="answer-up">
+                            <input type="hidden" name="answer_id" value="{{ answer.id }}">
+                            <button type="submit" class="up-vote">
+                              <i class="fa-solid fa-caret-up"></i>
+                            </button>
+                          </form>
+                          <div class="vote-count-div">
+                            {{ answer.Likes }}
+                        </div>
+                          <form method="post" action="{% url 'authenticate:question-detail' question.id %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="input_type" value="answer-down">
+                            <input type="hidden" name="answer_id" value="{{ answer.id }}">
+                            <button type="submit" class="up-vote">
+                              <i class="fa-solid fa-caret-down"></i>
+                            </button>
+                          </form>
+                        <div class="bookmark">
+                            <i class="fa-regular fa-bookmark" style="color: rgb(192, 178, 178);"></i>
+                        </div>
+                        <div class="bookmark timeline">
+                            <i class="fa-solid fa-clock-rotate-left" style="color: #c0bfbc;"></i>
+                        </div>
+                    </div>
+                    <div class="section-two">
+                        <div class="ques-info">
+                            <div class="ques-decsription">
+                                {{ answer.Content}}
+                            </div>
+                            <div class="extra-user-info">
+                                <div class="share-edit">
+                                    <p>Share</p>
+                                    <p>Edit</p>
+                                    <p>Follow</p>
+                                </div>
+                                <div class="user-info-stats">
+                                    Answered {{ answer.CreatedAt|timesince:""}}
+                                    <div class="user-pic-stat">
+                                        <img src="{% static 'images/icon.png'%}" alt="profile" height="40px" width="40px"/>
+                                        <div style="padding-left: 7px;">
+                                            <span style="color: rgb(60, 138, 255);">{{ answer.user }}</span>
+                                            <p>1</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="comment-section">
+                                {% for comment in answer.comment_set.all %}
+                                    <p>{{ comment.Content }} - <span style="color: rgb(126, 126, 255);">{{ comment.user }}</span></p>
+                                {% endfor %}
+                            </div>
+                            <div class="answer-input-comment answer-{{ answer.id }}">
+                                <form method="post">
+                                    {% csrf_token %}
+                                    <div class="ans-comment-area">
+                                        {{ form.Content }}
+                                    </div>
+                                    <input type="hidden" name="input_type" value="answer-comment">
+                                        <input type="hidden" name="answer_id" value="{{ answer.id }}">
+                                    <button class="ques-comment-btn">Post your comment</button>
+                                </form>
+                                
+                            </div>
+                            <p class="add-btn" onclick="showAnswerCommentInput('{{answer.id}}')">
+                                Add a comment
+                            </p>
+                        </div>                        
+                    </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="enter-your-answer">
+        <p>Your Answer</p>
+        <form method="post">
+            {% csrf_token %}
+                {{ answer_form.Content }}
+            <input type="hidden" name="input_type" value="answer">
+            <button>Post your answer</button>
+        </form>
+    </div>
+    <div class="last-text">
+        <p>Not the answer you're looking for? Browse other questions tagged</p>
+        <div class="tags-container">
+            {% for tag in question.tag_list %}
+                <div class="tag-content">
+                    {{ tag }}
+                </div>
             {% endfor %}
-        {% endfor %}
-    </div> -->
+            </div>
+            <p>or ask your own question. </p>
+        </div>
 </div>
 

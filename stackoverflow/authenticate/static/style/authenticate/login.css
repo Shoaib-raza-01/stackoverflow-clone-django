@@ -63,6 +63,21 @@ input{
     border: 1px solid #b4bdc7;
     border-radius: 10px;
 }
+.error{
+    display: block;
+    text-align: left;
+    color: red;
+    font-style: italic;
+    font-size: small;
+}
+.errorlist.nonfield{
+    display: block;
+    margin-top: 5px;
+    color: #ff0000; /* Error message color */
+    list-style: none;
+    padding: 0;
+}
+
 /* laptop  */
 @media only screen and (min-width: 1024px){
 
