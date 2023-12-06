@@ -1,40 +1,7 @@
 {% load static %}
 {% block head %}
     <link rel="stylesheet" href="{% static 'style/authenticate/main-body.css' %}">
-
-    <script>
-        function goToAskQuestion(){
-            window.location = "{% url 'authenticate:ask-question'%}";
-        }
-        function showCommentInput(){
-            document.querySelector('.input-comment').style.display='block';
-        }
-        function showAnswerCommentInput(clickedItemId){
-            let commentForm = document.querySelector(`.answer-${clickedItemId}`);
-            if (commentForm) {
-                commentForm.style.display = 'block';
-            }
-        }
-        function checkEnter(event) {
-            if (event.key === 'Enter') {
-                let commentTextarea = document.querySelector('.comment');
-                commentTextarea.value = '';
-                commentTextarea.style.display = 'none';
-            }
-        }
-        document.addEventListener('mouseup', (event) => {
-            const ques_inpt = document.querySelector('.input-comment');
-            const ans_inpt = document.querySelectorAll('.answer-input-comment');
-            for (let i=0;i<ans_inpt.length;i++){
-                if (!ans_inpt[i].contains(event.target)){
-                    ans_inpt[i].style.display='none';
-                    }
-                }
-            if (!ques_inpt || !ques_inpt.contains(event.target)) {
-                document.querySelector('.input-comment').style.display = 'none';
-            }
-        })
-    </script>
+    <link rel="stylesheet" href="{% static 'style/authenticate/question-details.css' %}">
 
 {% endblock %}
 <div class="page-body">
@@ -44,12 +11,12 @@
             {{ question.Title}}
         </p>
         <button class="ask-ques-btn" type="button" onclick="goToAskQuestion()">Ask Question</button>
-    </div>
-    <div class="added-info">
-        <p class="asked-at">Asked <span style="color: black; padding-right:15px">{{ question.CreatedAt|timesince:""}}</span></p>
-        <p class="modified-at">Modified <span style="color: black; padding-right:15px">{{ question.CreatedAt|timesince:""}}</span></p>
-        <p class="views-count">Views <span style="color: black; padding-right:15px">{{ question.views}}</span></p>
-    </div>
+        </div>
+        <div class="added-info">
+            <p class="asked-at">Asked <span style="color: black; padding-right:15px">{{ question.CreatedAt|timesince:""}}</span></p>
+            <p class="modified-at">Modified <span style="color: black; padding-right:15px">{{ question.CreatedAt|timesince:""}}</span></p>
+            <p class="views-count">Views <span style="color: black; padding-right:15px">{{ question.views}}</span></p>
+        </div>
     </div>
 
     <div class="question-information">
@@ -143,7 +110,7 @@
             <div class="answer-header">
                 <p> {{question.answer_set.count}} Answers</p>
                 <div class="sort-input">
-                    Sorted by:
+                    <p>Sorted by:</p>
                     <select name="sorting-option" id="sort">
                         <option value="">Highest score (default)</option>
                         <option value="">Trending (recent votes count more)</option>
@@ -239,6 +206,9 @@
             {% csrf_token %}
                 {{ answer_form.Content }}
             <input type="hidden" name="input_type" value="answer">
+            <div class="preview-answer">
+                
+            </div>
             <button>Post your answer</button>
         </form>
     </div>
@@ -254,4 +224,37 @@
             <p>or ask your own question. </p>
         </div>
 </div>
+<script>
+    function goToAskQuestion(){
+        window.location = "{% url 'authenticate:ask-question'%}";
+    }
+    function showCommentInput(){
+        document.querySelector('.input-comment').style.display='block';
+    }
+    function showAnswerCommentInput(clickedItemId){
+        let commentForm = document.querySelector(`.answer-${clickedItemId}`);
+        if (commentForm) {
+            commentForm.style.display = 'block';
+        }
+    }
+    function checkEnter(event) {
+        if (event.key === 'Enter') {
+            let commentTextarea = document.querySelector('.comment');
+            commentTextarea.value = '';
+            commentTextarea.style.display = 'none';
+        }
+    }
+    document.addEventListener('mouseup', (event) => {
+        const ques_inpt = document.querySelector('.input-comment');
+        const ans_inpt = document.querySelectorAll('.answer-input-comment');
+        for (let i=0;i<ans_inpt.length;i++){
+            if (!ans_inpt[i].contains(event.target)){
+                ans_inpt[i].style.display='none';
+                }
+            }
+        if (!ques_inpt || !ques_inpt.contains(event.target)) {
+            document.querySelector('.input-comment').style.display = 'none';
+        }
+    })
+</script>
 
