@@ -69,10 +69,10 @@
                 {% csrf_token %}
                 <div class="form-data">
                 {% for form_field in form %}
-                    <p class="label"> {{ form_field.label }} </p>
-                    {{ form_field}}
+                    <p class="label "> {{ form_field.label }} </p>
+                    <p class="{% if form_field.errors %} input_error {% endif %}">{{ form_field}}</p>
                     {% if form_field.errors %}
-                        <span class="error">{{ form_field.errors }}</span><br/><br/>
+                        <span class="error">{{ form_field.errors }}</span>
                     {% endif %}
                 {% endfor %}
                 <br>

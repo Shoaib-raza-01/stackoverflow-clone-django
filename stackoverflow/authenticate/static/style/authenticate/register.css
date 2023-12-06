@@ -141,6 +141,15 @@ button{
     border-radius: 10px;
     margin-top: 12px;
 }
+.errorlist{
+    list-style: none;
+    color: red;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+.input_error input{
+    border-color: red;
+}
 /* laptop */
 @media only screen and (min-width: 1024px) {
     .create{

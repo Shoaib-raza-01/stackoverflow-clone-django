@@ -2,24 +2,11 @@
 
 {% block head %}
     <link rel="stylesheet" href="{% static 'logged-nav.css'%}">
-    <script>
-        function toggleMenu() {
-            var menu = document.querySelector(".ul-content");
-            menu.style.display = menu.style.display === "block" ? "none" : "block";
-          }
-          document.addEventListener('mouseup', function (e) {
-            var menuList = document.querySelector(".ul-content");
-            var profileButton = document.querySelector('.stack-exchanfe-dropdown');
-    
-            if (!menuList.contains(e.target) && !profileButton.contains(e.target)) {
-                menuList.style.display = 'none';
-            }
-        });
-    </script>
 {% endblock %}
 
 <header>
     <div class="header-container">
+        <div class="header-content">
 
         <div class="stackflow">
             <a href="/"><img src="{% static 'images/Stack-Overflow-Logo.png' %}"></a>
@@ -27,12 +14,21 @@
         <div class="options">
             <p class="product" ><a href="#">Products</a></p>
         </div>
-        <div class="search-container">
-            <div class="search-icon">
-                <img src="{% static 'images/search.png' %}" alt="search icon" height="40px" width="40px">
+        <form method="post" action="{% url 'authenticate:home' %}">
+            {% csrf_token %}
+            <div class="search-container">
+                <div class="search-icon">
+                    <img src="{% static 'images/search.png' %}" alt="search icon" height="40px" width="40px">
+                </div>
+        
+                <input type="hidden" class="search-input-value" name="input-value" value="" placeholder="Search...">
+                <input type="text" class="search-input" placeholder="Search...">
+                
             </div>
-            <input type="text" class="search-input" placeholder="Search...">
-        </div>
+        
+            <!-- <button type="submit">Submit</button> -->
+        </form>
+        
         <div class="logged-in">
             <img src="{% static 'images/stackoverflow_icon.png' %}"  alt="Profile Picture" height="30px" width="30px" />
             <img src="{% static 'images/inbox.png' %}" alt="inbox" height="25px" width="25px"/>
@@ -44,11 +40,69 @@
                     <div class="ul-heading">
                         CURRENT COMMUNITY
                     </div>
-                    <div class="ul-conyent">
-
+                    <div class="ul-items-container">
+                        <div class="logout-container">
+                            <div class="div-one">
+                                <img src="{% static 'images/icon.png' %}" alt="logo" height="25px" width="25px">
+                            <p>Stackoverflow</p>
+                            </div>
+                            <div class="div-two">
+                                <a>help</a>
+                                <a>chat</a>
+                                <a href="{% url 'authenticate:logout' %}">log out</a>
+                            </div>
+                        </div>
+                        <div class="meta-stack-over-flow">
+                            <i class="fa-solid fa-l"></i>
+                            <img src="{% static 'images/stackoverflow_icon.png' %}" alt="logo" height="17px" width="17px">
+                            <p>Meta Stack Overflow</p>
+                        </div>
+                    </div>
+                    <div class="ul-heading">
+                        YOUR COMMUNITY
+                    </div>
+                    <div class="div-one your-com">
+                        <img src="{% static 'images/icon.png' %}" alt="logo" height="25px" width="25px">
+                    <p>Stackoverflow</p>
                     </div>
                 </div>
             </button>
         </div>
     </div>
+</div>
+<script>
+    function toggleMenu() {
+        var menu = document.querySelector(".ul-content");
+        menu.style.display = menu.style.display === "block" ? "none" : "block";
+      }
+      document.addEventListener('mouseup', function (event) {
+        var menuList = document.querySelector(".ul-content");
+        var profileButton = document.querySelector('.stack-exchanfe-dropdown');
+
+        if (!menuList.contains(event.target) && !profileButton.contains(event.target)) {
+            menuList.style.display = 'none';
+        }
+    });
+
+    const inputField = document.querySelector(".search-input");
+    const hiddenInput = document.querySelector(".search-input-value");
+
+    inputField.addEventListener('input', (event) => {
+        const inputValue = event.target.value;
+        hiddenInput.value = inputValue;
+    });
+
+    inputField.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.keyCode === 13) {
+            const inputValue = inputField.value;
+            hiddenInput.value = inputValue;
+
+            // Optionally, you can submit the form
+            const form = inputField.closest('form');
+            if (form) {
+                form.submit();
+            }
+        }
+    });
+    </script>
 </header>

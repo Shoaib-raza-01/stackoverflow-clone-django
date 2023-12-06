@@ -21,7 +21,6 @@ body{
     width: 550px;
 }
 .instructions{
-    width: 40vw;
     background-color: #edf5fd;
     padding: 25px;
     margin-top: 50px;
@@ -115,12 +114,34 @@ button{
 
 /* laptop  */
 @media only screen and (min-width: 1024px){
-
+    .instructions{
+        width: 40vw;
+    }
+    .field_divs{
+        width: 40.5vw;
+    }
 }
 
 /* mobile  */
 @media only screen and (max-width: 767px){
-
+    .ask-question{
+        margin-left: 30px;
+    }
+    .ask-question .ask img{
+        display: none !important;
+    }
+    .instructions{
+        width: 70vw;
+    }
+    .field_divs{
+        width: 70vw;
+    }
+    input, textarea{
+        width: 63vw;
+    }
+    .buttons{
+        width: 140%;
+    }
 }
 
 /* tablet  */

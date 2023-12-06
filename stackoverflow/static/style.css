@@ -8,10 +8,6 @@ body {
     margin: 0;
     padding: 0;
 } 
-.homepage{
-    display: flex;
-    margin-top: 50px;
-} 
 .footer-container {
     max-width: 1200px;
     margin: 0 auto;
@@ -76,8 +72,19 @@ footer {
     margin-top: 10px;
 }
 
-/* Responsive styles */
-@media (max-width: 768px) {
+/* laptop  */
+@media only screen and (min-width: 1024px){
+    .homepage{
+        display: flex;
+        margin-top: 50px;
+    } 
+}
+/* mobile  */
+@media only screen and (max-width: 767px){
+    .homepage{
+        /* display: flex; */
+        margin-top: 50px;
+    } 
     .stackoverflow-footer {
         width: 100%; /* Full width in mobile view */
         float: none; /* Clear float for stacking */
@@ -88,3 +95,22 @@ footer {
         margin-right: 15px; /* Adjust as needed */
     }
 }
+
+/* tablet  */
+@media only screen and (min-width: 768px) and (max-width: 1023px){
+
+}
+
+
+/* Responsive styles */
+/* @media (max-width: 768px) {
+    .stackoverflow-footer {
+        width: 100%; 
+        float: none; 
+    }
+
+    .footer-list li {
+        display: inline-block;
+        margin-right: 15px;
+    }
+} */
