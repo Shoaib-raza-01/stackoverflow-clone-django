@@ -1,0 +1,128 @@
+.all-saved-div{
+    display: flex;
+    margin-left: 20px;
+}
+.saved-side-bar{
+    width: fit-content;
+    text-align: left;
+    font-size: 13px;
+    margin-top: 20px;
+}
+.saved-for-later{
+    padding-left: 20px;
+    color: rgb(128, 128, 128);
+}
+.all-saved{
+    background-color: #e7700d;
+    border-radius: 20px;
+    padding: 8px 0;
+    color: white;
+    padding-right: 150px;
+    padding-left: 20px;
+    margin-bottom: 10px;
+}
+.my_list{
+    display: flex;
+    width: 200px;
+    justify-content: space-between;
+    margin: 20px;
+    font-weight: 600;
+}
+.all-saves-appear-here{
+    width: 43vw;
+    margin-top: 20px;
+    margin-left: 25px;
+}
+.upper-div, .lower-div{
+    display: flex;
+    justify-content: space-between;
+}
+.lower-div{
+    margin: 20px 0;
+}
+.upper-div p{
+    font-size: 22px;
+    font-weight: 500;
+}
+.create-list-btn{
+    height: fit-content;
+    width: fit-content;
+    padding: 10px;
+    background-color: #1b70d0;
+    color: white;
+    font-size: 14px;
+    border-radius: 6px;
+}
+.bookmarked-list{
+    margin-bottom: 50px;
+}
+.question-bookmarks{
+    border-radius: 4px;
+    border: 1px solid rgb(223, 223, 223);
+    margin-bottom: 5px;
+    padding: 15px;
+}
+.saved-count{
+    font-size: 19px;
+    font-weight: 600;
+}
+.question-meta{
+    display: flex;
+}
+.votes, .view, .answers{
+    font-size: 13px;
+    padding-right: 10px;
+}
+
+.answers .gt_zero{
+    color: green;
+    border: 1px solid green;
+    border-radius: 5px;
+    font-size: 12px;
+    width: fit-content;
+    padding: 4px;
+}
+.bookmarked-title{
+    font-size: 18px;
+    text-decoration: none;
+    color: #1b70d0;
+}
+.no-bookmarks{
+    display: flex;
+    margin: 50px 0;
+    /* margin-bottom: 30px; */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.no_bookmark{
+    height: 100px;
+    width: 100px;
+
+}
+.no-text{
+    margin-top: 50px;
+    border: 1px solid #d1d1d1;
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+    font-size: 14px;
+    color: #757575;
+    width: fit-content;
+}
+table {
+    font-size: 14px;
+    border-collapse: collapse;
+    width: 200px;
+}
+
+th, td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    /* border-radius: 8px; */
+    padding: 8px;
+}
+
+th {
+    background-color: #f2f2f2;
+}

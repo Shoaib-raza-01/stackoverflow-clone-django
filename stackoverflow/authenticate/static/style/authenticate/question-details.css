@@ -53,6 +53,11 @@
     padding: 15px 0;
     justify-content: center;
 }
+.bookmark-btn{
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
 .timeline{
     padding-top: 0 !important;
 }
@@ -272,6 +277,28 @@ textarea{
     margin-bottom: 25px;
     display: none;
 }
+/* .code-block {
+    background-color: #f4f4f4;
+    padding: 10px;
+    margin: 10px 0;
+    padding-right: 50px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    overflow: auto;
+} */
+pre{
+    height: fit-content;
+    width: fit-content;
+    background-color: #e2e2e2;
+    border-radius: 8px;
+    /* border: 1px solid #aacbec; */
+    padding: 10px;
+    margin: 10px 15px;
+}
+/* code{
+    
+
+} */
 
 @media only screen and (min-width: 1024px){
     

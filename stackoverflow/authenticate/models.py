@@ -2,50 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 # from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 
-# Create your models here.
-
-# class CustomUserManager(BaseUserManager):
-#     def create_user(self, email, password=None, **extra_fields):
-#         if not email:
-#             raise ValueError('The Email field must be set')
-#         email = self.normalize_email(email)
-#         user = self.model(email=email, **extra_fields)
-#         user.set_password(password)
-#         user.save(using=self._db)
-#         return user
-
-#     def create_superuser(self, email, password=None, **extra_fields):
-#         extra_fields.setdefault('is_staff', True)
-#         extra_fields.setdefault('is_superuser', True)
-
-#         return self.create_user(email, password, **extra_fields)
-
-# class CustomUser(AbstractBaseUser, PermissionsMixin):
-#     email = models.EmailField(unique=True)
-#     first_name = models.CharField(max_length=30)
-#     last_name = models.CharField(max_length=30)
-#     is_active = models.BooleanField(default=True)
-#     is_staff = models.BooleanField(default=False)
-
-#     objects = CustomUserManager()
-
-#     USERNAME_FIELD = 'email'
-    # REQUIRED_FIELDS = ['first_name', 'last_name']
-    # class Meta:
-    #     verbose_name_plural = 'customuser'
-
-    # def __str__(self):
-    #     return self.email
-
-
-# class User(models.Model):
-#     # image = models.URLField()
-#     bio = models.TextField()
-#     phone = models.CharField(max_length=15, unique=True)
-#     UserName = models.CharField(max_length=255, unique=True)
-#     Email = models.EmailField(unique=True)
-#     Password = models.CharField(max_length=255)
-
 class Question(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     Title = models.CharField(max_length=255)
@@ -55,6 +11,10 @@ class Question(models.Model):
     Tags = models.CharField(max_length=100)
     votes = models.IntegerField(default=0)
     views = models.IntegerField(default=0)
+    
+    def __str__(self) -> str:
+        # return super().__str__()
+        return self.Title
 
 class Answer(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
@@ -63,9 +23,9 @@ class Answer(models.Model):
     CreatedAt = models.DateTimeField(auto_now_add=True)
     Likes = models.IntegerField(default=0)
     flag = models.BooleanField(default=True)
+    
     class Meta:
         ordering = ["-CreatedAt"]
-        # unique_together =["Likes", "user", "Content"]
 
 class Comment(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE, null=True, blank=True)
@@ -90,3 +50,22 @@ class AnswerVote(models.Model):
 
     class Meta:
         unique_together = ('user', 'answer')
+        
+class UserInformation(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    Name = models.CharField(max_length=30, blank=True)
+    Title = models.CharField(max_length=20, blank=True)
+    Profile_image = models.ImageField(upload_to='profile_pics', blank=True, null=True)
+    Location = models.CharField(max_length=70, blank=True)
+    About = models.TextField(blank=True)
+    CreatedAt = models.DateField(auto_now_add=True)
+    Website_link = models.CharField(max_length=70, blank=True)
+    Github_link = models.CharField(max_length=70, blank=True)
+    Twitter_link = models.CharField(max_length=70, blank=True)
+    
+class BookMarked(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    question = models.ForeignKey(Question, on_delete=models.CASCADE, null=True, blank=True)
+    answer = models.ForeignKey(Answer, on_delete=models.CASCADE, null=True, blank=True)
+    isBookMarked = models.BooleanField(default=False)
+    

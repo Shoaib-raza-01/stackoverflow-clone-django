@@ -40,7 +40,7 @@
         <div class="others">
             <div class="item" onclick="handleItemClick(this)">
                 <img src="{% static 'images/bookmark.png'%}" alt="Home icon">
-                <a href="#">Saves</a>
+                <a href="{% url 'authenticate:saved-view' %}">Saves</a>
             </div>
             <div class="item" onclick="handleItemClick(this)">
                 <img src="{% static 'images/group.png'%}" alt="Home icon">

@@ -1,4 +1,5 @@
 {% load static %}
+{% load markdown_filters %}
 {% block head %}
     <link rel="stylesheet" href="{% static 'style/authenticate/main-body.css' %}">
     <link rel="stylesheet" href="{% static 'style/authenticate/question-details.css' %}">
@@ -41,7 +42,23 @@
                 </button>
             </form>
             <div class="bookmark">
-                <i class="fa-regular fa-bookmark" style="color: rgb(192, 178, 178);"></i>
+                <form method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="input_type" value="ques-bookmark">
+                    <button type="submit" class="bookmark-btn">
+                        {% if request.user.is_authenticated %}
+                            {% if bookmark and request.user == bookmark.user %}
+                                <i class="fa-solid fa-bookmark q-bookmark" style="color: #ff7800;"></i>
+                            {% else %}
+                                <i class="fa-regular fa-bookmark q-bookmark" style="color: grey;"></i>
+                            {% endif %}
+                        {% else %}
+                            <i class="fa-regular fa-bookmark q-bookmark" style="color: grey;"></i>
+                        {% endif %}
+                    </button>
+                </form>
+                
+                
             </div>
             <div class="bookmark timeline">
                 <i class="fa-solid fa-clock-rotate-left" style="color: #c0bfbc;"></i>
@@ -49,10 +66,10 @@
         </div>
         <div class="ques-info">
             <div class="ques-decsription">
-                {{ question.Description }}
+                {{ question.Description|markdown|safe }}
             </div>
             <div class="ques-what-u-tried">
-                {{ question.what_you_try }}
+                {{ question.what_you_try |markdown|safe}}
             </div>
             <div class="tags-container">
                 {% for tag in question.tag_list %}
@@ -144,7 +161,21 @@
                             </button>
                           </form>
                         <div class="bookmark">
-                            <i class="fa-regular fa-bookmark" style="color: rgb(192, 178, 178);"></i>
+                            <form method="post">
+                                {% csrf_token %}
+                                <input type="hidden" name="input_type" value="ans-bookmark">
+                                <button type="submit" class="bookmark-btn">
+                                    {% if request.user.is_authenticated %}
+                                    {% if request.user != bookmark.user and answer != bookmark.answer %}
+                                    <i class="fa-regular fa-bookmark q-bookmark" style="color: grey;"></i>
+                                    {% else %}
+                                    <i class="fa-solid fa-bookmark q-bookmark" style="color: #ff7800;"></i>
+                                    {% endif %}
+                                    {% else %}
+                                    <i class="fa-regular fa-bookmark q-bookmark"></i>
+                                    {% endif %}
+                                </button>
+                            </form>
                         </div>
                         <div class="bookmark timeline">
                             <i class="fa-solid fa-clock-rotate-left" style="color: #c0bfbc;"></i>
@@ -153,7 +184,7 @@
                     <div class="section-two">
                         <div class="ques-info">
                             <div class="ques-decsription">
-                                {{ answer.Content}}
+                                {{ answer.Content|markdown|safe}}
                             </div>
                             <div class="extra-user-info">
                                 <div class="share-edit">
@@ -255,6 +286,16 @@
         if (!ques_inpt || !ques_inpt.contains(event.target)) {
             document.querySelector('.input-comment').style.display = 'none';
         }
-    })
+    });
+    function changeBookmark() {
+        let element = document.querySelector('.q-bookmark');
+        if (element.style.color === "grey") {
+            element.classList.replace("fa-regular", "fa-solid" );
+            element.style.color = "#ff7800";
+        }
+    }
+    function changeAnsBookmark(){
+
+    };
 </script>
 
