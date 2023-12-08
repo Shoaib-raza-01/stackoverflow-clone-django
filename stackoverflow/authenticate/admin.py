@@ -30,3 +30,5 @@ class CommentAdmin(admin.ModelAdmin):
 admin.site.register(models.Question, QuestionAdmin)
 admin.site.register(models.Answer, AnswerAdmin)
 admin.site.register(models.Comment, CommentAdmin)
+admin.site.register(models.UserInformation)
+admin.site.register(models.BookMarked)

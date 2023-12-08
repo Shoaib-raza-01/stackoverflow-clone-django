@@ -1,0 +1,54 @@
+{% load static %}
+<div class="top-level-div">
+    <div class="user-conatiner">
+        <img src="{% if request.user.userinformation.Profile_image %}{{ request.user.userinformation.Profile_image.url }}
+        {% else %}
+        {% static 'images/icon.png'%}
+        {% endif %}" alt="user img" class="profile-image">
+        <div class="another-div">
+            <div class="user-information">
+                <h2>{{ user_info.Name }}</h2>
+                <div class="meta-information">
+                    <p><span style="padding-right: 5px;"><i class="fa-solid fa-cake-candles" style="color: #727272; padding-right: 5px;"></i></i>Member since</span>{{ user_info.CreatedAt }}</p>
+                    <p><span style="padding-right: 5px;"><i class="fa-regular fa-clock" style="color: #727272;"></i></span>{{ user_info.user.last_login}}</p>
+                    <p><span style="padding-right: 5px;"><i class="fa-solid fa-calendar-days" style="color: #727272;"></i></span>Somewhere in the world</p>
+                </div>
+            </div>
+            <div class="buttons">
+                <div class="edit-button" onclick="showEditPage()">
+                    <a href="{% url 'authenticate:edit-profile' %}"><i class="fa fa-pencil" style="color: rgb(56, 56, 56);"></i> Edit profile</a>
+                </div>
+                <div class="profile-button">
+                    <a href="#"> Profiles <i class="fa-solid fa-caret-down" style="color: #3d3d3d; padding-left: 4px"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="navigation-options">
+        <div class="profile-tab nav-tabs" onclick="changeColor(this)">
+            Profile
+        </div>
+        <div class="activity-tab nav-tabs" onclick="changeColor(this)">
+            Activities
+        </div>
+        <div class="saved-tab nav-tabs" onclick="changeColor(this)">
+            Saved
+        </div>
+        <div class="setting-tab nav-tabs" onclick="changeColor(this)">
+            Settings
+        </div>
+    </div>
+    
+    <div class="saved-items">
+        {% include view_template %}
+    </div>
+
+    <script>
+        function showEditPage() {
+            //document.querySelector('.edit-profile').style.display = 'block';
+            //document.querySelector('.saved-items').style.display = 'none';
+            //document.querySelector('.navigation-options').style.display = 'none';
+            window.location = "{% url 'authenticate:edit-profile' %}"
+        }
+    </script>
+</div>

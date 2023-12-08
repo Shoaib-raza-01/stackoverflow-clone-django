@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-Avb2QiuDEEvB4bZJYdft2mNjVShBftLdPG8FJ0V7irTLQ8Uo0qcPxh4Plq7G5tGm0rU+1SPhVotteLpBERwTkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{% static 'style/authenticate/homepage.css' %}">
+    <link rel="stylesheet" href="{% static 'style/authenticate/users-info.css' %}">
+    <link rel="stylesheet" href="{% static 'style/authenticate/saved.css' %}">
+    <link rel="stylesheet" href="{% static 'style/authenticate/all-saved.css' %}">
+    <link rel="stylesheet" href="{% static 'style/authenticate/edit-profile.css' %}">
+{% endblock %}
+
+{% block header %}  
+
+    {% if user.is_authenticated %}
+        {% include 'include/logged-header.html' %}
+    {% else %}
+        {% include 'include/nonlogged-header.html' %}
+    {% endif %}  
+
+{% endblock %}
+
+{% block sidebar %}
+    {% include 'side-bar.html'   %}
+{% endblock %}
+
+{% block main %}
+    <div class="saved-main-container">
+        {% include 'user-info.html' %}
+    </div>
+{% endblock %}
+    
+{% block meta %}
+{% endblock %}
+
+{% block footer %}
+    {% include 'include/footer.html'   %}
+{% endblock %}

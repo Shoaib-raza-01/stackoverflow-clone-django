@@ -1,0 +1,74 @@
+.edit-section-heading{
+    font-weight: 600;
+    margin: 15px;
+}
+.saved-for-later{
+    margin-bottom: 15px;
+}
+.header-div{
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+    font-size: 20px;
+    font-weight: 600;
+    border-bottom: 1px solid #cccccc;
+}
+.section-header-div{
+    padding-bottom: 15px;
+    /* margin-bottom: 15px; */
+    font-size: 16px;
+    font-weight: 400;
+}
+.info-form-container{
+    margin-bottom: 15px;
+    border: 1px solid #cccccc;
+    border-radius: 8px;
+    padding: 15px;
+}
+/* styles.css */
+
+/* Optional: Apply a general style to the entire form */
+.user-info-form {
+    max-width: 600px; /* Adjust the maximum width as needed */
+    margin: auto;
+}
+
+/* Style for each form field */
+.user-info-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.user-info-form input[type="text"],
+.user-info-form input[type="url"],
+.user-info-form input[type="file"],
+.user-info-form textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+/* Add more specific styles for other field types as needed */
+
+/* Style for submit button */
+.user-info-form input[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.user-info-form input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+/* Optional: Style for error messages */
+.user-info-form .error-message {
+    color: red;
+    font-size: 12px;
+    margin-top: -10px;
+    margin-bottom: 10px;
+}

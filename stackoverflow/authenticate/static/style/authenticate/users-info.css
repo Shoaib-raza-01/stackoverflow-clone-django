@@ -1,0 +1,69 @@
+.user-conatiner{
+    display: flex;
+}
+.another-div{
+    display: flex;
+    justify-content: space-between;
+    width: 46vw;
+    margin-top: 20px;
+}
+.profile-image{
+    height: 150px;
+    margin: 25px;
+    width: 150px;
+    background-color: #f7f1f1;
+    border-radius: 8px;
+    border: 1px solid #d4d4d4;
+}
+.user-information{
+    margin-top: 40px;
+}
+.meta-information{
+    display: flex;
+    margin-top: 15px;
+    justify-content: space-around;
+}
+.meta-information p{
+    color: #727272;
+    padding: 0 7px;
+    font-size: 14px;
+}
+.buttons{
+    display: flex;
+    justify-content: center;
+}
+.edit-button, .profile-button{
+    background-color: white;
+    border: 1px solid #d4d4d4;
+    border-radius: 5px;
+    width: fit-content;
+    height: fit-content;
+    padding: 8px;
+    margin: 0 5px;
+}
+
+.edit-button a, .profile-button a {
+    text-decoration: none;
+    color: black;
+    font-size: 12px;
+}
+.navigation-options{
+    display: flex;
+    width: 400px;
+    justify-content: space-evenly;
+}
+.nav-tabs{
+    height: fit-content;
+    width: fit-content;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 14px;
+    color: #727272;
+}
+.nav-tabs:hover{
+    background-color: #e7700d;
+    color: white;
+}
+.edit-profile{
+    display: none;
+}

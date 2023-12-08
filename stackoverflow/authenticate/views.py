@@ -85,70 +85,16 @@ def ask_question_view(request):
         return render(request, 'ask-question.html', {'form': form})
     else:
         return redirect("authenticate:login")
-# def question_detail(request, question_id):
-#     question = get_object_or_404(models.Question, id=question_id)
-#     answers = models.Answer.objects.filter(question=question)
-#     comment_form = forms.CommentForm(request.POST)
-#     answer_from = forms.AnswerForm(request.POST)
-#     question.tag_list = question.Tags.split(",")
-    
-#     if request.method == 'POST':
-#         input_type = request.POST.get("input_type")
-#         if input_type in ("up", "down"):
-#             if input_type == "up":
-#                 question.votes += 1
-#             elif input_type == "down":
-#                 question.votes -= 1
-#             question.save()
-            
-#         elif input_type in ("answer-up", "answer-down"):
-#             answer_id_str = request.POST.get("answer_id")
-#             if answer_id_str is not None:
-#                 answer_id = int(answer_id_str)
-#                 answer = get_object_or_404(models.Answer, id=answer_id)
 
-#                 if input_type == "answer-up":
-#                     answer.Likes += 1
-#                 elif input_type == "answer-down":
-#                     answer.Likes -= 1
-#                 answer.save()
-#                 return redirect('authenticate:question-detail', question_id=answer.question.id)
-            
-#         elif input_type == "answer-comment":
-#             if comment_form.is_valid():
-#                 comment = comment_form.save(commit=False)
-#                 comment.user = request.user
-#                 comment.answer = get_object_or_404(models.Answer, id=int(request.POST['answer_id']))
-#                 comment.save()
-#                 return redirect('authenticate:question-detail', question_id=comment.answer.question.id)
-            
-#         elif comment_form.is_valid():
-#             comment = comment_form.save(commit=False)
-#             comment.user = request.user
-#             comment.question = question
-#             comment.save()
-#             return redirect('authenticate:question-detail', question_id=question.id) 
-        
-#         elif answer_from.is_valid():
-#             answer = answer_from.save(commit=False)
-#             answer.user = request.user
-#             answer.question = question
-#             print("done")
-#             answer.save()
-#             return redirect('authenticate:question-detail', question_id=question.id) 
-            
-            
-            
-
-        
-#     return render(request, 'question-detail.html', {'question': question, 'answers': answers, 'form': comment_form, 'answer_form': answer_from})
 def question_detail(request, question_id):
     question = get_object_or_404(models.Question, id=question_id)
     answers = models.Answer.objects.filter(question=question)
     comment_form = forms.CommentForm(request.POST)
     answer_form = forms.AnswerForm(request.POST)
-    question.tag_list = question.Tags.split(",")
-    
+    question.tag_list = question.Tags.split(" ")
+    bookmark= None
+    if request.user.is_authenticated:
+        bookmark = models.BookMarked.objects.filter(user=request.user, question=question).first()
     # question.views += 1
     # question.save()
 
@@ -184,14 +130,10 @@ def question_detail(request, question_id):
                 question.votes -= 1
                 models.QuestionVote.objects.filter(user=request.user, question=question).update(vote_type="down")
                 
-                
             question.save()
-
             
             return redirect('authenticate:question-detail', question_id=question.id)
-
-
-
+        
         elif input_type in ("answer-up", "answer-down"):
             answer_id_str = request.POST.get("answer_id")
             if answer_id_str is not None:
@@ -233,7 +175,7 @@ def question_detail(request, question_id):
                 comment.user = request.user
                 comment.answer = get_object_or_404(models.Answer, id=int(request.POST['answer_id']))
                 comment.save()
-                return redirect('authenticate:question-detail', question_id=question.id)
+                return redirect(request.META.get('HTTP_REFERER'))
 
         elif comment_form.is_valid() and input_type == "comment":
             comment = comment_form.save(commit=False)
@@ -249,55 +191,82 @@ def question_detail(request, question_id):
                 answer.question = question
                 answer.save()
                 return redirect('authenticate:question-detail', question_id=question.id)
+            
+        elif input_type == "ques-bookmark":
+            bookmarked = models.BookMarked.objects.filter(user=request.user, question=question).exists()
+            
+            if not bookmarked:
+                models.BookMarked.objects.create(user=request.user, question=question, isBookMarked=True)
+                # bookmark = models.BookMarked.objects.filter(user=request.user, question=question).first()
+                print("created the bookmark")
+                return redirect('authenticate:question-detail', question_id=question.id)
+            else:
+                models.BookMarked.objects.filter(user=request.user, question=question).delete()
+                print("deleted the bookmark created")
+                
+                return redirect('authenticate:question-detail', question_id=question.id)
     else:
         print("login required")
+        # bookmark=""
     context = {
         'question': question, 
         'answers': answers, 
         'form': comment_form, 
-        'answer_form': answer_form
+        'answer_form': answer_form,
+        'bookmark': bookmark
         }
 
     return render(request, 'question-detail.html', context)
 
-
-
+def saved_view(request):
+    if request.user.is_authenticated:
+        user_info = models.UserInformation.objects.get(user=request.user)
+        bookmarked = models.BookMarked.objects.filter(user=request.user)
+        tag_list=[]
+        for i in bookmarked:
+            print(i.question.Tags)
+            
+            tag_list.append(i.question.Tags)
+        print(tag_list)
+        context = {
+            "user_info": user_info,
+            "bookmarked": bookmarked,
+            'tag_list': tag_list,
+            'view_template': 'all-saved.html'
+        }
+        return render(request, 'saved.html', context)
+    return redirect("authenticate:login")
 
 def profile_view(request):
-    pass
+    return HttpResponse("profilepage")
+
+def edit_view(request):
+    user_info = models.UserInformation.objects.get(user=request.user)
+
+    if request.method == "POST":
+        edit_form = forms.UserInfoForm(request.POST, request.FILES, instance=request.user.userinformation)
+        if edit_form.is_valid():
+            # edit = edit_form.save(commit=False)
+            # edit.user = request.user
+            edit_form.save()
+            
+            # cleaned_data = edit_form.cleaned_data
+            
+            
+            # name = edit_form.cleaned_data.get("Name")
+            # print(name)
+            return redirect(request.META.get('HTTP_REFERER'))
+    else:
+        edit_form = forms.UserInfoForm(instance=request.user.userinformation)
+
+    context ={
+        "user_info": user_info,
+        'view_template': 'edit-profile.html',
+        'edit_form': edit_form
+    }
+    return render(request, 'saved.html', context)
 
 def logout_view(request):
     if request.user:
         logout(request)
     return redirect("authenticate:home")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# def login_view(request):
-#     if request.method == 'POST':
-#         form = EmailAuthenticationForm(request, request.POST)
-#         if form.is_valid():
-#             email = form.cleaned_data.get('email')
-#             password = form.cleaned_data.get('password')
-#             user = authenticate(request, email=email, password=password)
-#             if user:
-#                 login(request, user)
-#                 return redirect('authenticate:home')
-
-#     else:
-#         form = EmailAuthenticationForm()
-
-#     return render(request, 'login.html', {'form': form})

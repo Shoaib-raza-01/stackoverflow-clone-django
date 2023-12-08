@@ -1,0 +1,78 @@
+{% load static %}
+<div class="all-saved-div">
+    <div class="saved-side-bar">
+        <div class="all-saved">
+            All saves
+        </div>
+        <div class="saved-for-later">
+            For later
+        </div>
+        <div class="my_list">
+            <p>MY LIST</p>
+            <i class="fa-solid fa-plus" style="color: rgb(91, 91, 255);"></i>
+        </div>
+    </div>
+    <div class="all-saves-appear-here">
+        <div class="upper-div">
+            <p>All Saves</p>
+            <div class="create-list-btn">
+                Create new list
+            </div>
+        </div>
+        <div class="lower-div">
+            <div class="saved-count">
+                {{ bookmarked.count }} Saved Items
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Score</th>
+                        <th>Activities </th>
+                        <th>Views </th>
+                        <th>Newest </th>
+                        <th>Added </th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        <div class="bookmarked-list">
+            {% if bookmarked.count > 0 %}
+                {% for bookmark in bookmarked %}
+                
+                    <div class="question-bookmarks">
+                        <div class="question-meta">
+                            <p class="votes">
+                                {{ bookmark.question.votes }} votes
+                            </p>
+                            <div class="answers">
+                                {% if bookmark.question.answer_count > 0 %}
+                                <div class="gt_zero">
+                                    {{bookmark.question.answer_set.all.count}} answers
+                                </div>
+                                {% else %}
+                                {{bookmark.question.answer_set.all.count}} answers
+                                {% endif %}
+                            </div>
+                            <p class="view">
+                                {{ bookmark.question.views }} views
+                            </p>
+                        </div>
+                        <a href="{% url 'authenticate:question-detail' bookmark.question.id %}" class="bookmarked-title">{{ bookmark.question.Title}}</a>
+                        <p>
+                            {{ bookmark.question.Tags }}
+                        </p>
+                    </div>
+                {% endfor %}
+                {% else %}
+                <div class="no-bookmarks">
+                    <img class="no_bookmark" src="{% static 'images/slash.png' %}" alt="no_bookmark">
+                    <div class="no-text">
+                        <h3>No bookmarks yet</h3>
+                        <p>The questions and answers you save to view later will be appearing here</p>
+                    </div>
+                </div>
+
+            {% endif %}
+        </div>
+    </div>
+</div>

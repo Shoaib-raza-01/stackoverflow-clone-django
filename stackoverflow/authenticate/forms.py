@@ -38,3 +38,17 @@ class AnswerForm(forms.ModelForm):
     class Meta:
         model = models.Answer
         fields = ['Content']
+
+class UserInfoForm(forms.ModelForm):
+    class Meta:
+        model = models.UserInformation
+        fields = [
+            'Name',
+            'Title',
+            'Profile_image',
+            'Location',
+            'About',
+            'Website_link',
+            'Github_link',
+            'Twitter_link',
+        ]

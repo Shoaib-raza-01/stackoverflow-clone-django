@@ -1,0 +1,48 @@
+{% load static %}
+<div class="all-saved-div">
+    <div class="saved-side-bar">
+        <p class="edit-section-heading">
+            PERSONAL INFORMATION
+        </p>
+        <div class="all-saved">
+            Edit Profile
+        </div>
+        <div class="saved-for-later">
+            Delete Profile
+        </div>
+        <p class="edit-section-heading" style="padding-top: 20px;">
+            EMAIL SETTINGS
+        </p>
+        <div class="saved-for-later">
+            Edit Email Settings
+        </div>
+        <div class="saved-for-later">
+            Tag watching & ignoring
+        </div>
+        <div class="saved-for-later">
+            Community Digest
+        </div>
+        <div class="saved-for-later">
+            Question Subscriptions
+        </div>
+        <div class="my_list">
+            <p>MY LIST</p>
+            <i class="fa-solid fa-plus" style="color: rgb(91, 91, 255);"></i>
+        </div>
+    </div>
+    <div class="all-saves-appear-here">
+        <div class="header-div">
+            Edit your profile
+        </div>
+        <div class="section-header-div">
+            Public Information
+        </div>
+        <div class="info-form-container">
+            <form class="user-info-form" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ edit_form.as_p }}
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+    </div>
+</div>
